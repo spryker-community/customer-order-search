@@ -1,0 +1,9 @@
+{
+    "name": "@spryker-community/dummy-module-for-zed",
+    "version": "0.1",
+    "description": "Spryker Community Dummy Module for Zed",
+    "license": "MIT",
+    "dependencies": {
+        "dummy-package-tsl": "1.0.3"
+    }
+}

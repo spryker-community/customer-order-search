@@ -1,6 +1,6 @@
 {
-    "name": "spryker-community/test-module",
-    "description": "Simple SprykerCommunity Test module",
+    "name": "spryker-community/dummy-module",
+    "description": "SprykerCommunity Dummy module",
     "type": "library",
     "require": {
         "php": ">=8.1",

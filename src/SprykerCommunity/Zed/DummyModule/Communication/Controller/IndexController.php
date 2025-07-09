@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerCommunity\Zed\TestModule\Communication\Controller;
+namespace SprykerCommunity\Zed\DummyModule\Communication\Controller;
 
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ class IndexController extends AbstractController
     public function indexAction(Request $request): array
     {
         return [
-            'message' => 'Hello World from SprykerCommunity Test Module!',
+            'message' => 'Hello World from SprykerCommunity Dummy Module!',
             'timestamp' => date('Y-m-d H:i:s'),
         ];
     }

@@ -1,0 +1,9 @@
+{
+    "name": "@spryker-community/dummy-module",
+    "version": "0.1",
+    "description": "Spryker Community Dummy Module",
+    "license": "MIT",
+    "dependencies": {
+        "hello-world-npm": "1.0.0"
+    }
+}
