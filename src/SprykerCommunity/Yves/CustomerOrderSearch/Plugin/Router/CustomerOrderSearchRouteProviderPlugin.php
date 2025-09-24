@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerCommunity\Yves\OrderSearchPage\Plugin\Router;
+namespace SprykerCommunity\Yves\CustomerOrderSearch\Plugin\Router;
 
 use Spryker\Yves\Router\Plugin\RouteProvider\AbstractRouteProviderPlugin;
 use Spryker\Yves\Router\Route\RouteCollection;
 
-class OrderSearchPageRouteProviderPlugin extends AbstractRouteProviderPlugin
+class CustomerOrderSearchRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
     /**
      * @var string
@@ -41,7 +41,7 @@ class OrderSearchPageRouteProviderPlugin extends AbstractRouteProviderPlugin
      */
     protected function addFulltextSearchRoute(RouteCollection $routeCollection): RouteCollection
     {
-        $route = $this->buildRoute('/search/order', 'OrderSearchPage', 'OrderSearch', 'fulltextSearchAction');
+        $route = $this->buildRoute('/search/order', 'CustomerOrderSearch', 'OrderSearch', 'fulltextSearchAction');
         $routeCollection->add(static::ROUTE_NAME_SEARCH, $route);
 
         return $routeCollection;

@@ -5,15 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerCommunity\Yves\OrderSearchPage\Plugin;
+namespace SprykerCommunity\Yves\CustomerOrderSearch\Plugin;
 
 use Generated\Shared\Transfer\TabMetaDataTransfer;
 use Spryker\Yves\Kernel\AbstractPlugin;
-use SprykerCommunity\Yves\OrderSearchPage\Plugin\Router\OrderSearchPageRouteProviderPlugin;
+use SprykerCommunity\Yves\CustomerOrderSearch\Plugin\Router\CustomerOrderSearchRouteProviderPlugin;
 use SprykerShop\Yves\TabsWidgetExtension\Plugin\FullTextSearchTabPluginInterface;
 
 /**
- * @method \SprykerShop\Yves\OrderSearchPage\OrderSearchPageFactory getFactory()
+ * @method \SprykerCommunity\Yves\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
  */
 class FullTextSearchOrderPageTabPlugin extends AbstractPlugin implements FullTextSearchTabPluginInterface
 {
@@ -40,12 +40,10 @@ class FullTextSearchOrderPageTabPlugin extends AbstractPlugin implements FullTex
      */
     public function calculateItemCount(string $searchString, array $requestParams = []): int
     {
-        return 1;
-        // TODO
-        //return $this
-        //    ->getFactory()
-        //    ->getOrderPageSearchClient()
-        //    ->searchCount($searchString, $requestParams);
+        return $this
+            ->getFactory()
+            ->getCustomerOrderSearchClient()
+            ->searchCount($searchString, $requestParams);
     }
 
     /**
@@ -60,7 +58,7 @@ class FullTextSearchOrderPageTabPlugin extends AbstractPlugin implements FullTex
         $tabsMetaDataTransfer = (new TabMetaDataTransfer())
             ->setName(static::NAME)
             ->setTitle(static::TAB_TRANSLATED_TITLE)
-            ->setRoute(OrderSearchPageRouteProviderPlugin::ROUTE_NAME_SEARCH);
+            ->setRoute(CustomerOrderSearchRouteProviderPlugin::ROUTE_NAME_SEARCH);
 
         return $tabsMetaDataTransfer;
     }

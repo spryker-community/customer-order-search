@@ -148,7 +148,7 @@ protected function getRouteProvider(): array
 {
     return [
         ...
-        new OrderSearchPageRouteProviderPlugin(),
+        new CustomerOrderSearchRouteProviderPlugin(),
     ];
 }
 ```
