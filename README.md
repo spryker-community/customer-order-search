@@ -1,6 +1,27 @@
-# SprykerCommunity Customer Order Search Installation Guide
+# SprykerCommunity Customer Order Search
+This README provides step-by-step instructions to integrate the SprykerCommunity CustomerOrderSearch into your Spryker B2B Demo Shop.
 
-This README provides step-by-step instructions to integrate the SprykerCommunity Dummy Module into your Spryker B2B Demo Shop.
+## Features
+
+### Order indexing
+  Customer orders (including order items) are indexed into Elasticsearch and can be queried via the standard search functionality.
+
+### Product detail page integration
+  On the product detail page, the shop can display an indicator if the logged-in customer has already purchased the product.
+
+### Console publishing
+Orders can be (re)published to Elasticsearch via console commands.
+
+Publish all orders (with confirmation prompt).
+```bash
+console order:search:publish
+```
+Publish specific orders by passing one or more `sales_order_id` values.
+```bash
+console order:search:publish 123 456 789
+```
+
+# Installation Guide
 
 ## Prerequisites
 
@@ -52,8 +73,12 @@ b2b-demo-shop/
 │       │   └── package.json
 │       └── src/
 │           └── SprykerCommunity/
+│               └── Client/
+│                   └── CustomerOrderSearch/
+│               └── Yves/
+│                   └── CustomerOrderSearch/
 │               └── Zed/
-│                   └── DummyModule/
+│                   └── CustomerOrderSearch/
 ├── src/
 ├── vendor/
 └── composer.json
@@ -319,4 +344,10 @@ protected function getGlobalWidgets(): array
                 } only %}
             </div>
 ...
+```
+
+5. Generate transfer objects and setup db
+```bash
+docker/sdk console transfer:generate
+docker/sdk console propel:install
 ```
