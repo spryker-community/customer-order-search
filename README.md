@@ -260,3 +260,30 @@ protected function getGlobalWidgets(): array
         {% endif %}
         ...
 ```
+
+3. Add widget for PDP usage:
+
+`\Pyz\Yves\ShopApplication\ShopApplicationDependencyProvider`:
+```php
+protected function getGlobalWidgets(): array
+{
+    return [
+        ...
+        ProductDetailCustomerOrderWidget::class,
+    ];
+}
+```
+
+4. Add widget to PDP:
+
+`src/Pyz/Yves/CatalogPage/Theme/default/views/suggestion-results/suggestion-results.twig`
+```twig
+...
+            <div class="col col--sm-12 col--lg-5">
+                {% widget 'ProductDetailCustomerOrderWidget' args [data.product.sku] only %}{% endwidget %}
+                {% include molecule('product-configurator', 'ProductDetailPage') with {
+                    ...
+                } only %}
+            </div>
+...
+```
