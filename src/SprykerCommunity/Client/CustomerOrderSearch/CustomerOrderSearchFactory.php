@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace SprykerCommunity\Client\CustomerOrderSearch;
 
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\Search\SearchClientInterface;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
@@ -19,7 +20,9 @@ class CustomerOrderSearchFactory extends AbstractFactory
 {
     public function createCustomerOrderSearchQuery(string $searchString): QueryInterface
     {
-        $customerOrderSearchQueryPlugin = new CustomerOrderSearchQueryPlugin();
+        $customerOrderSearchQueryPlugin = new CustomerOrderSearchQueryPlugin(
+            $this->getCustomerClient(),
+        );
 
         if ($customerOrderSearchQueryPlugin instanceof SearchStringSetterInterface) {
             $customerOrderSearchQueryPlugin->setSearchString($searchString);
@@ -34,5 +37,10 @@ class CustomerOrderSearchFactory extends AbstractFactory
     public function getSearchClient(): SearchClientInterface
     {
         return $this->getProvidedDependency(CustomerOrderSearchDependencyProvider::CLIENT_SEARCH);
+    }
+
+    public function getCustomerClient(): CustomerClientInterface
+    {
+        return $this->getProvidedDependency(CustomerOrderSearchDependencyProvider::CLIENT_CUSTOMER);
     }
 }

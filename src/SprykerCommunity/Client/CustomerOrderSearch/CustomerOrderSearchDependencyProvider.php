@@ -19,6 +19,8 @@ class CustomerOrderSearchDependencyProvider extends AbstractDependencyProvider
      */
     public const CLIENT_SEARCH = 'CLIENT_SEARCH';
 
+    public const CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
+
     /**
      * @param \Spryker\Client\Kernel\Container $container
      *
@@ -40,6 +42,20 @@ class CustomerOrderSearchDependencyProvider extends AbstractDependencyProvider
     {
         $container->set(static::CLIENT_SEARCH, function (Container $container) {
             return $container->getLocator()->search()->client();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addCustomerClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CUSTOMER, function (Container $container) {
+            return $container->getLocator()->customer()->client();
         });
 
         return $container;

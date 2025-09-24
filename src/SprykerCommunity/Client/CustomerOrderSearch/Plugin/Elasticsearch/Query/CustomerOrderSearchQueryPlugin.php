@@ -12,6 +12,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
 use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\SearchContextTransfer;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\Search\Dependency\Plugin\SearchStringGetterInterface;
 use Spryker\Client\Search\Dependency\Plugin\SearchStringSetterInterface;
@@ -43,7 +44,9 @@ class CustomerOrderSearchQueryPlugin extends AbstractPlugin implements QueryInte
      */
     protected $searchContextTransfer;
 
-    public function __construct()
+    public function __construct(
+        private CustomerClientInterface $customerClient,
+    )
     {
         $this->query = $this->createSearchQuery();
     }
@@ -130,7 +133,13 @@ class CustomerOrderSearchQueryPlugin extends AbstractPlugin implements QueryInte
         $boolQuery->addShould($matchSkusQuery);
         $boolQuery->addShould($matchNamesQuery);
 
-        $query->setQuery($boolQuery);
+        $matchCustomerQuery = new MatchQuery('customer_reference', $this->customerClient->getCustomer()?->getCustomerReference());
+
+        $boolQueryTop = new BoolQuery();
+        $boolQueryTop->addMust($boolQuery);
+        $boolQueryTop->addMust($matchCustomerQuery);
+
+        $query->setQuery($boolQueryTop);
 
         return $query;
     }
