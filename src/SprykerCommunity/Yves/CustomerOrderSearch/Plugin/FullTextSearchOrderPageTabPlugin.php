@@ -13,7 +13,7 @@ use SprykerCommunity\Yves\CustomerOrderSearch\Plugin\Router\CustomerOrderSearchR
 use SprykerShop\Yves\TabsWidgetExtension\Plugin\FullTextSearchTabPluginInterface;
 
 /**
- * @method \SprykerShop\Yves\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
+ * @method \SprykerCommunity\Yves\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
  */
 class FullTextSearchOrderPageTabPlugin extends AbstractPlugin implements FullTextSearchTabPluginInterface
 {
@@ -40,12 +40,10 @@ class FullTextSearchOrderPageTabPlugin extends AbstractPlugin implements FullTex
      */
     public function calculateItemCount(string $searchString, array $requestParams = []): int
     {
-        return 1;
-        // TODO
-        //return $this
-        //    ->getFactory()
-        //    ->getOrderPageSearchClient()
-        //    ->searchCount($searchString, $requestParams);
+        return $this
+            ->getFactory()
+            ->getCustomerOrderSearchClient()
+            ->searchCount($searchString, $requestParams);
     }
 
     /**

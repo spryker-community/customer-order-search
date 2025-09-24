@@ -13,12 +13,34 @@ use Spryker\Yves\Kernel\Container;
 class CustomerOrderSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
+     * @var string
+     */
+    public const CLIENT_CLIENT_CUSTOMER_ORDER_SEARCH = 'CLIENT_CLIENT_CUSTOMER_ORDER_SEARCH';
+
+    /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
     public function provideDependencies(Container $container): Container
     {
+        $container = $this->addCustomerOrderSearchClient($container);
+
         return $container;
     }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addCustomerOrderSearchClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CLIENT_CUSTOMER_ORDER_SEARCH, function (Container $container) {
+            return $container->getLocator()->customerOrderSearch()->client();
+        });
+
+        return $container;
+    }
+
 }

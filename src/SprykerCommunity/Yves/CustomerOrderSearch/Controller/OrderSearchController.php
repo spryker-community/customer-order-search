@@ -12,7 +12,7 @@ use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method \SprykerShop\Yves\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
+ * @method \SprykerCommunity\Yves\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
  */
 class OrderSearchController extends AbstractController
 {
@@ -41,11 +41,10 @@ class OrderSearchController extends AbstractController
     {
         $searchString = (string)$request->query->get('q', '');
 
-        $searchResults = []; //TODO
-        //$searchResults = $this
-        //    ->getFactory()
-        //    ->getCmsPageSearchClient()
-        //    ->search($searchString, $request->query->all());
+        $searchResults = $this
+            ->getFactory()
+            ->getCustomerOrderSearchClient()
+            ->search($searchString, $request->query->all());
 
         $searchResults['searchString'] = $searchString;
 
