@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace SprykerCommunity\Shared\ProductPageSearch;
+namespace SprykerCommunity\Shared\CustomerOrderSearch;
 
 /**
  * Declares global environment configuration keys. Do not use it for other class constants.

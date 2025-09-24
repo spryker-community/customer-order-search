@@ -9,6 +9,8 @@ use SprykerCommunity\Shared\ProductPageSearch\CustomerOrderSearchConstants;
 
 /**
  * Publishes orders to Elasticsearch when sales_order changes.
+ *
+ * @method CustomerOrderSearchFacadeInterface getFacade
  */
 class OrderWritePublisherPlugin extends AbstractPlugin implements PublisherPluginInterface
 {
