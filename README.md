@@ -341,3 +341,9 @@ protected function getGlobalWidgets(): array
             </div>
 ...
 ```
+
+5. Generate transfer objects and setup db
+```bash
+docker/sdk console transfer:generate
+docker/sdk console propel:install
+```
