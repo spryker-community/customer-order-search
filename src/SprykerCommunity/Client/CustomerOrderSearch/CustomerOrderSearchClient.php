@@ -27,6 +27,7 @@ class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderS
      */
     public function searchCount(string $searchString, array $requestParameters): int
     {
+        // TODO
         return 1;
     }
 }
