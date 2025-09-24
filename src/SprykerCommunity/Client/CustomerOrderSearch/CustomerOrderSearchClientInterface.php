@@ -19,4 +19,11 @@ interface CustomerOrderSearchClientInterface
      * @return int
      */
     public function searchCount(string $searchString, array $requestParameters): int;
+
+    /**
+     * @param string $sku
+     *
+     * @return array
+     */
+    public function searchByConcrete(string $sku): array;
 }

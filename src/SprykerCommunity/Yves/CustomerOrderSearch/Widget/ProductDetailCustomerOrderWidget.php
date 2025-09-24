@@ -2,7 +2,9 @@
 
 namespace SprykerCommunity\Yves\CustomerOrderSearch\Widget;
 
-class ProductDetailCustomerOrderWidget
+use Spryker\Yves\Kernel\Widget\AbstractWidget;
+
+class ProductDetailCustomerOrderWidget extends AbstractWidget
 {
 
 }

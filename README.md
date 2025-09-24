@@ -248,7 +248,7 @@ protected function getGlobalWidgets(): array
 
 {% define data = {
     ...
-    orders: suggestionByType.orders | default([]),
+    orders: suggestionByType.customer_order | default([]),
     ...
 }
 
