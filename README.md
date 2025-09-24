@@ -130,7 +130,54 @@ vendor/bin/console cache:empty-all
 ],
 ```
 
-2. Install all JavaScript dependencies from the `/vendor/spryker-community` directory and compile them for use in your application:
+2. Add community to frontend build process:
+
+```javascript
+
+const globalSettings = {
+    ...
+    paths: {
+        ...
+        // community folders
+        community: './vendor/spryker-community',
+        ...
+    }
+    ...
+}
+
+
+const getAppSettingsByTheme = (namespaceConfig, theme, pathToConfig) => {
+    ...
+    const paths = {
+        ...
+        // community folders
+        community: globalSettings.paths.community,
+        ...
+    };
+    ...
+
+    // return settings
+    return {
+        ...
+        find: {
+        // entry point patterns (components)
+            componentEntryPoints: {
+                // absolute dirs in which look for
+                dirs: [
+                    join(globalSettings.context, paths.core),
+                    join(globalSettings.context, paths.eco),
+                        join(globalSettings.context, paths.community), // this position is cruicial
+                    join(globalSettings.context, paths.project),
+                ],
+                ...
+            },
+        ...
+    };
+    ...
+};
+```
+
+4. Install all JavaScript dependencies from the `/vendor/spryker-community` directory and compile them for use in your application:
 
 Note: Execute inside your `docker/sdk cli`
 ```bash
@@ -175,6 +222,8 @@ To ensure proper translation in the frontend, you need to add a new glossary for
 ```csv
 key,translation.de_DE,translation.en_US
 global.search.suggestion.in_orders,"In Bestellungen gefunden","Found in orders"
+customer-order-search.order-suggest.order_headline,'Bestellung "%reference%" vom %date%','Order "%reference%" from %date%'
+customer-order-search.order-suggest.order_subheadline,"Produkte: %count%","Products: %count%"
 ```
 
 ### Add widgets to Yves templates

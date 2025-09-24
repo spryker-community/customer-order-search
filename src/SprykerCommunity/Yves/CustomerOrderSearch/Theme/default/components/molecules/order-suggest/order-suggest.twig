@@ -14,13 +14,13 @@
 } %}
 
 {% block body %}
-    <div class="{{ config.name }}__container">
-        <a href="{{ path('customer/order/details', {'id': data.order.idSalesOrder}) }}" class="text-color">
-            <p class="{{ config.name }}__order-headline">
-                Order: {{ data.order.order_reference }} - from {{ data.order.order_created_at | formatDateTime }}
+    <div class="{{ config.name }}__container" style="background-color: #f6f6f6; border: 1px solid #202020; border-radius: 20px; padding: 0 0.5rem; margin-bottom: 0.5rem">
+        <a href="{{ path('customer/order/details', {'id': data.order.idSalesOrder}) }}" style="color: #202020; ">
+            <p class="{{ config.name }}__order-headline" style="">
+                {{ 'customer-order-search.order-suggest.order_headline' | trans({ '%reference%': data.order.order_reference, '%date%': data.order.order_created_at | formatDateTime }) }}
             </p>
             <p class="{{ config.name }}__order-subheadline text-small">
-                Products: {{ data.order.skus | length }}
+                {{ 'customer-order-search.order-suggest.order_subheadline' | trans({ '%count%': data.order.skus | length }) }}
             </p>
         </a>
     </div>
