@@ -1,11 +1,11 @@
-# SprykerCommunity Dummy Module Integration Guide
+# SprykerCommunity Customer Order Search Installation Guide
 
 This README provides step-by-step instructions to integrate the SprykerCommunity Dummy Module into your Spryker B2B Demo Shop.
 
 ## Prerequisites
 
 1. Spryker B2B Demo Shop installed and running
-2. Git access to clone the dummy module
+2. Git access to clone the "Customer Order Search" module
 3. Composer installed
 
 ## Workflow
@@ -32,12 +32,12 @@ Add the module directory to your main project's .gitignore file to prevent track
 
 ### Install the Dummy Module
 
-1. Clone Dummy Module
+1. Clone "Customer Order Search" Module
 
-Clone the dummy module repository into the module directory:
+Clone the "Customer Order Search" module repository into the module directory:
 
 ```bash
-git clone git@github.com:spryker-community/dummy-module.git dummy-module
+git clone git@github.com:spryker-community/customer-order-search.git customer-order-search
 ```
 
 Your directory structure should now look like:
@@ -45,7 +45,7 @@ Your directory structure should now look like:
 ```text
 b2b-demo-shop/
 ├── local-packages/
-│   └── dummy-module/
+│   └── customer-order-search/
 │       ├── assets/
 │       │   ├── Zed/
 │       │   │   └── package.json
@@ -68,7 +68,7 @@ Add the path repository configuration to your main project's composer.json:
     "repositories": [
         {
             "type": "path",
-            "url": "local-packages/dummy-module",
+            "url": "local-packages/customer-order-search",
             "options": {
                 "symlink": true
             }
@@ -82,7 +82,7 @@ Add the path repository configuration to your main project's composer.json:
 Run the composer require command from your demo shop root directory:
 
 ```bash
-composer require spryker-community/dummy-module:@dev
+composer require spryker-community/customer-order-search:@dev
 ```
 
 ### Make your project aware of Spryker Community
@@ -142,5 +142,4 @@ With `ls -la node_modules` you should see that we installed the node modules `du
 
 ### Verification
 
-After successful installation, you should be able to access the test module at:
-http://backoffice.eu.spryker.local/dummy-module
+xxx TBD

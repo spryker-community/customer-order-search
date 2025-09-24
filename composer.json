@@ -1,6 +1,6 @@
 {
-    "name": "spryker-community/dummy-module",
-    "description": "SprykerCommunity Dummy module",
+    "name": "spryker-community/customer-order-search",
+    "description": "SprykerCommunity Customer Order Search",
     "type": "library",
     "require": {
         "php": ">=8.1",
