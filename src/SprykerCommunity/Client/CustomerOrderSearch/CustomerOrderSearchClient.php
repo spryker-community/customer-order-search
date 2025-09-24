@@ -11,6 +11,9 @@ namespace SprykerCommunity\Client\CustomerOrderSearch;
 
 use Spryker\Client\Kernel\AbstractClient;
 
+/**
+ * @method \SprykerCommunity\Client\CustomerOrderSearch\CustomerOrderSearchFactory getFactory()
+ */
 class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderSearchClientInterface
 {
     /**
@@ -18,6 +21,15 @@ class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderS
      */
     public function search(string $searchString, array $requestParameters): array
     {
+        $searchQuery = $this->getFactory()
+            ->createCustomerOrderSearchQuery($searchString);
+
+        return $this->getFactory()
+            ->getSearchClient()
+            ->search($searchQuery, $requestParameters);
+
+
+
         // TODO: Implement search() method.
         return [
             [
