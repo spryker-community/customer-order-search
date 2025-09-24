@@ -143,3 +143,28 @@ With `ls -la node_modules` you should see that we installed the node modules `du
 ### Verification
 
 xxx TBD
+
+### Register plugins
+
+`\Pyz\Yves\Router\RouterDependencyProvider`:
+```php
+protected function getRouteProvider(): array
+{
+    return [
+        ...
+        new OrderSearchPageRouteProviderPlugin(),
+    ];
+}
+```
+
+`\Pyz\Yves\TabsWidget\TabsWidgetDependencyProvider`:
+```php
+protected function createFullTextSearchPlugins(): array
+{
+    return [
+        ...
+        new FullTextSearchOrderPageTabPlugin(),
+    ];
+}
+
+```

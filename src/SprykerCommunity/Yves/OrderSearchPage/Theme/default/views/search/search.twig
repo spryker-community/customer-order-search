@@ -1,0 +1,29 @@
+{% extends template('search-order-template', 'OrderSearchPage') %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        data: {
+            steps: [{
+                label: 'global.search' | trans,
+            }],
+        },
+    } only %}
+{% endblock %}
+
+{% block title %}
+    <h3>{{ 'global.search.results' | trans }} "<strong class="text-break">{{ data.searchString }}</strong>"</h3>
+{% endblock %}
+
+{% block form %}
+    <div class="col col--sm-12 spacing spacing--inner">
+        {% block tabsWidget %}
+            {% widget 'FullTextSearchTabsWidget' args [data.searchString, 'FullTextSearchOrderPage'] only %}{% endwidget %}
+        {% endblock %}
+    </div>
+
+    {{ parent() }}
+
+    {% if data.searchString is not empty %}
+        <input type="hidden" name="q" value="{{ data.searchString }}">
+    {% endif %}
+{% endblock %}
