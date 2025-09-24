@@ -14,7 +14,7 @@ use Spryker\Zed\SalesExtension\Dependency\Plugin\OrderPostSavePluginInterface;
  *
  * @method CustomerOrderSearchCommunicationFactory getFactory()
  */
-class OrderPostSavePublishPlugin extends AbstractPlugin implements OrderPostSavePluginInterface
+class CustomerOrderSearchPostSavePublishPlugin extends AbstractPlugin implements OrderPostSavePluginInterface
 {
     /**
      * @param SaveOrderTransfer $saveOrderTransfer
