@@ -42,9 +42,9 @@ class CustomerOrderSearchFacade extends AbstractFacade implements CustomerOrderS
         ];
 
         foreach ($orderTransfer->getItems() as $orderItemTransfer) {
-            $data['skus'] = $orderItemTransfer->getSku();
-            $data['abstractSkus'] = $orderItemTransfer->getAbstractSku();
-            $data['names'] = $orderItemTransfer->getName();
+            $data['skus'][] = $orderItemTransfer->getSku();
+            $data['abstractSkus'][] = $orderItemTransfer->getAbstractSku();
+            $data['names'][] = $orderItemTransfer->getName();
         }
 
         $searchDataTransfer = new SearchDocumentTransfer();
