@@ -1,0 +1,24 @@
+{% extends template('widget') %}
+
+ {% define data = {
+     orderSuggest: _widget.orderSuggest,
+     ordersLength: 2,
+ } %}
+
+{% block body %}
+    <div class="col col--sm-12">
+        <h6 class="suggestion-links-list__title suggestion-links-list__title--bottom-indent">
+            {{ 'global.search.suggestion.in_orders' | trans }}
+        </h6>
+
+        {% for order in data.orderSuggest|slice(0, data.ordersLength) %}
+            {% embed molecule('order-suggest', 'CustomerOrderSearch') with {
+                data: {
+                    order: order,
+                },
+            } only %}
+            {% endembed %}
+
+        {% endfor %}
+    </div>
+{% endblock %}

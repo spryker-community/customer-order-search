@@ -1,0 +1,27 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'order-suggest'
+} %}
+
+{% define data = {
+    order: {
+        idSalesOrder: required,
+        order_reference: required,
+        order_created_at: required,
+        skus: required
+    }
+} %}
+
+{% block body %}
+    <div class="{{ config.name }}__container">
+        <a href="{{ path('customer/order/details', {'id': data.order.idSalesOrder}) }}" class="text-color">
+            <p class="{{ config.name }}__order-headline">
+                Order: {{ data.order.order_reference }} - from {{ data.order.order_created_at | formatDateTime }}
+            </p>
+            <p class="{{ config.name }}__order-subheadline text-small">
+                Products: {{ data.order.skus | length }}
+            </p>
+        </a>
+    </div>
+{% endblock %}

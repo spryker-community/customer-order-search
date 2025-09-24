@@ -1,0 +1,22 @@
+@mixin product-suggest-order-suggest($name: '.order-suggest') {
+    #{$name} {
+        &__container {
+            border: 1px solid $setting-color-gray-7;
+            color: $setting-color-main;
+        }
+
+        &__order-headline {
+            font-size: rem(14);
+        }
+
+        &__order-headline {
+            font-size: rem(12);
+            letter-spacing: rem(0.12);
+        }
+
+
+        @content;
+    }
+}
+
+@include product-suggest-order-suggest();
