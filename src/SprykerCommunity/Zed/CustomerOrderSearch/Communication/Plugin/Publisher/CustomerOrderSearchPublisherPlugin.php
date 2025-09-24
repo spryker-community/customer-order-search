@@ -8,11 +8,11 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface;
 
 /**
- * Publishes orders to Elasticsearch when sales_order changes.
+ * Publishes orders to Elasticsearch
  *
  * @method CustomerOrderSearchFacadeInterface getFacade
  */
-class OrderWritePublisherPlugin extends AbstractPlugin implements PublisherPluginInterface
+class CustomerOrderSearchPublisherPlugin extends AbstractPlugin implements PublisherPluginInterface
 {
     public function getSubscribedEvents(): array
     {
