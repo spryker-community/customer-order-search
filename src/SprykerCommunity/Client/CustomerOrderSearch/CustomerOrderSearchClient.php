@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace SprykerCommunity\Client\CustomerOrderSearch;
 
+use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -26,7 +27,7 @@ class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderS
 
         return $this->getFactory()
             ->getSearchClient()
-            ->search($searchQuery, $requestParameters);
+            ->search($searchQuery, [new RawCatalogSearchResultFormatterPlugin()], $requestParameters);
 
 
 
