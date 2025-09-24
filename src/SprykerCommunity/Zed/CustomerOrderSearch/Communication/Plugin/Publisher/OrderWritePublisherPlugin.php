@@ -2,10 +2,10 @@
 
 namespace SprykerCommunity\Zed\CustomerOrderSearch\Communication\Plugin\Publisher;
 
+use SprykerCommunity\Shared\CustomerOrderSearch\CustomerOrderSearchConstants;
 use SprykerCommunity\Zed\CustomerOrderSearch\Business\CustomerOrderSearchFacadeInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface;
-use SprykerCommunity\Shared\ProductPageSearch\CustomerOrderSearchConstants;
 
 /**
  * Publishes orders to Elasticsearch when sales_order changes.
