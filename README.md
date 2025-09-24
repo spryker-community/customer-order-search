@@ -30,7 +30,7 @@ Add the module directory to your main project's .gitignore file to prevent track
 /local-packages/
 ```
 
-### Install the Dummy Module
+### Install the "Customer Order Search" Module
 
 1. Clone "Customer Order Search" Module
 
@@ -140,10 +140,6 @@ npm install
 With `ls -la node_modules` you should see that we installed the node modules `dummy-package-tsl` and `hello-world-npm`.
 
 
-### Verification
-
-xxx TBD
-
 ### Register plugins
 
 `\Pyz\Yves\Router\RouterDependencyProvider`:
@@ -167,4 +163,51 @@ protected function createFullTextSearchPlugins(): array
     ];
 }
 
+```
+
+### Add translations
+
+To ensure proper translation in the frontend, you need to add a new glossary for the pages:
+
+1. Open the backoffice http://backoffice.eu.spryker.local/glossary
+
+2. Add the following keys to glossary:
+```csv
+key,translation.de_DE,translation.en_US
+global.search.suggestion.in_orders,"In Bestellungen gefunden","Found in orders"
+```
+
+### Add widgets to Yves templates
+
+1. Register the order widget for suggest usage:
+
+`\Pyz\Yves\ShopApplication\ShopApplicationDependencyProvider`:
+```php
+protected function getGlobalWidgets(): array
+{
+    return [
+        ...
+        CustomerOrderSuggest::class,
+    ];
+}
+```
+
+2. Add widget snippet to template:
+`src/Pyz/Yves/CatalogPage/Theme/default/views/suggestion-results/suggestion-results.twig`
+```twig
+...
+
+{% define data = {
+    ...
+    orders: suggestionByType.orders | default([]),
+    ...
+}
+
+...
+
+    <div class="grid grid--gap">
+        {% if data.orders is not empty %}
+            {% widget 'CustomerOrderSuggest' args [data.orders] only %}{% endwidget %}
+        {% endif %}
+        ...
 ```
