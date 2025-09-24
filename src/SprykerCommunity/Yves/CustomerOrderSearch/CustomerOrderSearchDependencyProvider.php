@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerCommunity\Yves\OrderSearchPage;
+namespace SprykerCommunity\Yves\CustomerOrderSearch;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 
-class OrderSearchPageDependencyProvider extends AbstractBundleDependencyProvider
+class CustomerOrderSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
      * @param \Spryker\Yves\Kernel\Container $container
