@@ -118,7 +118,7 @@ class CustomerOrderSearchQueryPlugin extends AbstractPlugin implements QueryInte
     protected function createSearchQuery(): Query
     {
         $query = new Query();
-        $query->setSource(['search_result_data']);
+        $query->setSource([PageIndexMap::SEARCH_RESULT_DATA]);
 
         $boolQuery = new BoolQuery();
 

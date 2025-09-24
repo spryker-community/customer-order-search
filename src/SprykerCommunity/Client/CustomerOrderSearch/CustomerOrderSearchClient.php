@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace SprykerCommunity\Client\CustomerOrderSearch;
 
+use Generated\Shared\Search\PageIndexMap;
 use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
 use Spryker\Client\Kernel\AbstractClient;
 
@@ -34,7 +35,7 @@ class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderS
         /** @var \Elastica\Result $item */
         foreach ($data->getResults() as $item) {
             $rawData = $item->getData();
-            $results[] = $rawData['search_result_data'];
+            $results[] = $rawData[PageIndexMap::SEARCH_RESULT_DATA];
         }
 
         return $results;

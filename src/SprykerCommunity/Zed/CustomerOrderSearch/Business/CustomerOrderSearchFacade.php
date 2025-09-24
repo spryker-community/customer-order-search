@@ -2,6 +2,7 @@
 
 namespace SprykerCommunity\Zed\CustomerOrderSearch\Business;
 
+use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\OrderConditionsTransfer;
 use Generated\Shared\Transfer\OrderCriteriaTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
@@ -64,8 +65,15 @@ class CustomerOrderSearchFacade extends AbstractFacade implements CustomerOrderS
             'abstractSkus' => $searchResultData['abstractSkus'],
             'names' => $searchResultData['names'],
             'store' => $orderTransfer->getStore(),
-            'search_result_data' => $searchResultData,
+            PageIndexMap::SEARCH_RESULT_DATA => $searchResultData,
             'type' => 'customer_order',
+            'is-active' => true,
+            'locale' => 'en_US',
+            'full-text' => array_merge(
+                $searchResultData['skus'],
+                $searchResultData['abstractSkus'],
+                $searchResultData['names'],
+            )
         ];
 
         $searchContextTransfer = new SearchContextTransfer();
