@@ -1,7 +1,7 @@
 {% extends template('page-layout-main') %}
 
 {% define data = {
-    pages: _view.order_pages | default([]),
+    pages: _view.orders | default([]),
     sort: _view.sort | default([]),
     searchString: _view.searchString,
     title: ('global.search.results' | trans) ~ ' ' ~ _view.searchString,

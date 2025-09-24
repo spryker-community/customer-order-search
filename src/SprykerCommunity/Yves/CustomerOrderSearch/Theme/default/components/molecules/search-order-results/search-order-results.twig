@@ -16,7 +16,7 @@
                 <article class="box grid grid--justify">
                     <div class="col">
                         {% block title %}
-                            <h2 class="title--h6">{{ page.name | raw }}</h2>
+                            <h2 class="title--h6">{{ page.order_reference | raw }} ({{ page.order_created_at | formatDateTime }})</h2>
                         {% endblock %}
 
                         {% block content %}
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col">
                         {% block button %}
-                            <a href="{{ functionExists('generatePath') ? generatePath(page.url) : page.url }}" class="button">
+                            <a href="{{ path('customer/order/details', {'id': page.id_sales_order}) }}" class="button">
                                 {{ 'global.search.results.view' | trans }} >>
                             </a>
                         {% endblock %}

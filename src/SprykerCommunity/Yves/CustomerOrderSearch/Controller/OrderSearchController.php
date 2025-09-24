@@ -46,7 +46,10 @@ class OrderSearchController extends AbstractController
             ->getCustomerOrderSearchClient()
             ->search($searchString, $request->query->all());
 
+        //TODO maybe replace when real search data comes back
+        $searchResults['orders'] = $searchResults;
         $searchResults['searchString'] = $searchString;
+
 
         return $searchResults;
     }
