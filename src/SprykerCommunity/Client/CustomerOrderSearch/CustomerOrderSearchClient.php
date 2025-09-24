@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace SprykerCommunity\Client\CustomerOrderSearch;
 
+use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -24,75 +25,19 @@ class CustomerOrderSearchClient extends AbstractClient implements CustomerOrderS
         $searchQuery = $this->getFactory()
             ->createCustomerOrderSearchQuery($searchString);
 
-        return $this->getFactory()
+        $data = $this->getFactory()
             ->getSearchClient()
-            ->search($searchQuery, $requestParameters);
+            ->search($searchQuery, []);
 
+        $results = [];
 
+        /** @var \Elastica\Result $item */
+        foreach ($data->getResults() as $item) {
+            $rawData = $item->getData();
+            $results[] = $rawData['search_result_data'];
+        }
 
-        // TODO: Implement search() method.
-        return [
-            [
-                'id_sales_order' => '1',
-                'customer_reference' => 'DE-123456',
-                'order_created_at' => new \DateTime('22.09.2025 13:00:00'),
-                'order_reference' => '890',
-                'skus' => [
-                    '123','234','345'
-                ],
-                'abstractSkus'=> [
-                    'abstract-123','abstract-234','abstract-345'
-                ],
-                'names'=> [
-                    'Tisch', 'Fisch', 'Lampe'
-                ],
-            ],
-            [
-                'id_sales_order' => '2',
-                'customer_reference' => 'DE-123456',
-                'order_created_at' => new \DateTime('20.09.2025 13:00:00'),
-                'order_reference' => '895',
-                'skus' => [
-                    '123','234','345'
-                ],
-                'abstractSkus'=> [
-                    'abstract-123','abstract-234','abstract-345'
-                ],
-                'names'=> [
-                    'Tisch', 'Fisch', 'Lampe'
-                ],
-            ],
-            [
-                'id_sales_order' => '3',
-                'customer_reference' => 'DE-123456',
-                'order_created_at' => new \DateTime('18.09.2025 13:00:00'),
-                'order_reference' => '893',
-                'skus' => [
-                    '123','234','345'
-                ],
-                'abstractSkus'=> [
-                    'abstract-123','abstract-234','abstract-345'
-                ],
-                'names'=> [
-                    'Tisch', 'Fisch', 'Lampe'
-                ],
-            ],
-            [
-                'id_sales_order' => '4',
-                'customer_reference' => 'DE-123456',
-                'order_created_at' => new \DateTime('22.08.2025 13:00:00'),
-                'order_reference' => '892',
-                'skus' => [
-                    '123','234','345'
-                ],
-                'abstractSkus'=> [
-                    'abstract-123','abstract-234','abstract-345'
-                ],
-                'names'=> [
-                    'Tisch', 'Fisch', 'Lampe'
-                ],
-            ],
-        ];
+        return $results;
     }
 
     /**
