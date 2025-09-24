@@ -26,18 +26,18 @@ class CustomerOrderSearchFacade extends AbstractFacade implements CustomerOrderS
         $orderConditionsTransfer->setSalesOrderIds($orderIds);
         $orderCriteriaTransfer->setOrderConditions($orderConditionsTransfer);
 
-        $orders = $this->getFactory()
+        $orderCollection = $this->getFactory()
             ->getSalesFacade()
             ->getOrderCollection($orderCriteriaTransfer);
 
-        foreach ($orders as $orderTransfer) {
+        foreach ($orderCollection->getOrders() as $orderTransfer) {
             $this->publishOrder($orderTransfer);
         }
     }
 
     public function publishOrder(OrderTransfer $orderTransfer): void
     {
-        $data = [
+        $searchResultData = [
             'customer_reference' => $orderTransfer->getCustomerReference(),
             'order_created_at' => $orderTransfer->getCreatedAt(),
             'order_reference' => $orderTransfer->getOrderReference(),
@@ -45,21 +45,33 @@ class CustomerOrderSearchFacade extends AbstractFacade implements CustomerOrderS
         ];
 
         foreach ($orderTransfer->getItems() as $orderItemTransfer) {
-            $data['skus'][] = $orderItemTransfer->getSku();
-            $data['abstractSkus'][] = $orderItemTransfer->getAbstractSku();
-            $data['names'][] = $orderItemTransfer->getName();
+            $searchResultData['skus'][] = $orderItemTransfer->getSku();
+            $searchResultData['abstractSkus'][] = $orderItemTransfer->getAbstractSku();
+            $searchResultData['names'][] = $orderItemTransfer->getName();
         }
 
-        $index = 'hackathon-2025_de_page';
-        $elasticSearchContext = new ElasticsearchSearchContextTransfer();
-        $elasticSearchContext->setIndexName($index);
+        $data = [
+            'customer_reference' => $orderTransfer->getCustomerReference(),
+            'order_created_at' => $orderTransfer->getCreatedAt(),
+            'order_reference' => $orderTransfer->getOrderReference(),
+            'id_sales_order' => $orderTransfer->getIdSalesOrder(),
+            'skus' => $searchResultData['skus'],
+            'abstractSkus' => $searchResultData['abstractSkus'],
+            'names' => $searchResultData['names'],
+            'store' => $orderTransfer->getStore(),
+            'search_result_data' => $searchResultData,
+            'type' => 'customer_order',
+        ];
+
         $searchContextTransfer = new SearchContextTransfer();
-        $searchContextTransfer->setElasticsearchContext($elasticSearchContext);
+        $searchContextTransfer->setSourceIdentifier('page');
+        $searchContextTransfer->setStoreName($orderTransfer->getStore());
 
         $searchDataTransfer = new SearchDocumentTransfer();
         $searchDataTransfer->setSearchContext($searchContextTransfer);
+        $searchDataTransfer->setId('customer_order:' . $orderTransfer->getIdSalesOrder());
         $searchDataTransfer->setType('customer_order');
-        $searchDataTransfer->setStoreName(Store::getInstance());
+        $searchDataTransfer->setStoreName($orderTransfer->getStore());
         $searchDataTransfer->setData($data);
         $this->getFactory()->getSearchClient()->writeDocument($searchDataTransfer);
     }
