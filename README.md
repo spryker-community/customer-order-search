@@ -209,8 +209,41 @@ protected function createFullTextSearchPlugins(): array
         new FullTextSearchOrderPageTabPlugin(),
     ];
 }
-
 ```
+`\Pyz\Zed\Publisher\PublisherDependencyProvider`:
+```php
+protected function getPublisherPlugins(): array
+{
+    return array_merge(
+        ...
+        [
+           new CustomerOrderSearchPublisherPlugin(),
+        ],
+    );
+}
+```
+`\Pyz\Zed\Sales\SalesDependencyProvider`:
+```php
+    protected function getOrderPostSavePlugins(): array
+    {
+        return [
+            ...
+            new CustomerOrderSearchPostSavePublishPlugin(),
+        ];
+    }
+```
+`\Pyz\Zed\Console\ConsoleDependencyProvider`:
+```php
+    protected function getConsoleCommands(Container $container): array
+    {
+        $commands = [
+            ...
+            new CustomerOrderSearchPublishConsole(),
+        ];
+    }
+```
+
+
 
 ### Add translations
 

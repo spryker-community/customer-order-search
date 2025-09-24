@@ -15,13 +15,20 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class CustomerOrderSearchFacade extends AbstractFacade implements CustomerOrderSearchFacadeInterface
 {
     /**
+     * Specification:
+     * - publishes all orders to elastic search (when given, subset of $orderIds is published)
+     *
+     * @api
+     *
      * @param array<int> $orderIds
      */
-    public function publishOrders(array $orderIds): void
+    public function publishOrders(array $orderIds = []): void
     {
         $orderCriteriaTransfer = new OrderCriteriaTransfer();
         $orderConditionsTransfer = new OrderConditionsTransfer();
-        $orderConditionsTransfer->setSalesOrderIds($orderIds);
+        if (!empty($orderIds)) {
+            $orderConditionsTransfer->setSalesOrderIds($orderIds);
+        }
         $orderCriteriaTransfer->setOrderConditions($orderConditionsTransfer);
 
         $orderCollection = $this->getFactory()

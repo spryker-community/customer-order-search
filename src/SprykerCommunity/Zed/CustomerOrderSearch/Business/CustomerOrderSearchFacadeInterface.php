@@ -12,5 +12,5 @@ interface CustomerOrderSearchFacadeInterface
     /**
      * @param array<int> $orderIds
      */
-    public function publishOrders(array $orderIds): void;
+    public function publishOrders(array $orderIds = []): void;
 }
