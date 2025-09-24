@@ -38,4 +38,9 @@ class CustomerOrderSearchConstants
      * @var string
      */
     public const CUSTOMER_ORDER_RESOURCE_NAME = 'customer_order';
+
+    /**
+     * Event name for publishing customer order
+     */
+    public const PUBLISH_CUSTOMER_ORDER_EVENT = 'publish.customer-order.event';
 }
