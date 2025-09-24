@@ -232,6 +232,18 @@ protected function getPublisherPlugins(): array
         ];
     }
 ```
+`\Pyz\Zed\Console\ConsoleDependencyProvider`:
+```php
+    protected function getConsoleCommands(Container $container): array
+    {
+        $commands = [
+            ...
+            new CustomerOrderSearchPublishConsole(),
+        ];
+    }
+```
+
+
 
 ### Add translations
 
