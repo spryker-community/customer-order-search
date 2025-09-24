@@ -7,9 +7,11 @@
 
         &__order-headline {
             font-size: rem(14);
+            letter-spacing: rem(0.14);
+            font-weight: bold;
         }
 
-        &__order-headline {
+        &__order-subheadline {
             font-size: rem(12);
             letter-spacing: rem(0.12);
         }
