@@ -209,8 +209,41 @@ protected function createFullTextSearchPlugins(): array
         new FullTextSearchOrderPageTabPlugin(),
     ];
 }
-
 ```
+`\Pyz\Zed\Publisher\PublisherDependencyProvider`:
+```php
+protected function getPublisherPlugins(): array
+{
+    return array_merge(
+        ...
+        [
+           new CustomerOrderSearchPublisherPlugin(),
+        ],
+    );
+}
+```
+`\Pyz\Zed\Sales\SalesDependencyProvider`:
+```php
+    protected function getOrderPostSavePlugins(): array
+    {
+        return [
+            ...
+            new CustomerOrderSearchPostSavePublishPlugin(),
+        ];
+    }
+```
+`\Pyz\Zed\Console\ConsoleDependencyProvider`:
+```php
+    protected function getConsoleCommands(Container $container): array
+    {
+        $commands = [
+            ...
+            new CustomerOrderSearchPublishConsole(),
+        ];
+    }
+```
+
+
 
 ### Add translations
 
@@ -259,4 +292,31 @@ protected function getGlobalWidgets(): array
             {% widget 'CustomerOrderSuggest' args [data.orders] only %}{% endwidget %}
         {% endif %}
         ...
+```
+
+3. Add widget for PDP usage:
+
+`\Pyz\Yves\ShopApplication\ShopApplicationDependencyProvider`:
+```php
+protected function getGlobalWidgets(): array
+{
+    return [
+        ...
+        ProductDetailCustomerOrderWidget::class,
+    ];
+}
+```
+
+4. Add widget to PDP:
+
+`src/Pyz/Yves/CatalogPage/Theme/default/views/suggestion-results/suggestion-results.twig`
+```twig
+...
+            <div class="col col--sm-12 col--lg-5">
+                {% widget 'ProductDetailCustomerOrderWidget' args [data.product.sku] only %}{% endwidget %}
+                {% include molecule('product-configurator', 'ProductDetailPage') with {
+                    ...
+                } only %}
+            </div>
+...
 ```

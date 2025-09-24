@@ -1,20 +1,21 @@
 {% extends template('widget') %}
 
  {% define data = {
-     productSetList: _widget.productSetList
+     orders: _widget.orders
  } %}
 
 {% block body %}
-    {% if data.productSetList is defined %}
-        {% for productSet in data.productSetList %}
-            {% include organism('product-set-cms', 'ProductSetWidget') ignore missing with {
-                data: {
-                    title: productSet.productSet.name,
-                    products: productSet.productViews,
-                    description: productSet.productSet.description,
-                    images: productSet.productSet.imageSets.0.images | default([])
-                }
-            } only %}
-        {% endfor %}
+    {% if data.orders is not empty %}
+        <div style="border: 1px solid rgba(220,20,60,1); padding: 1rem; background: rgba(220,20,60,0.2); ">
+            <p>You have ordered this Product already:</p>
+            {% for order in data.orders %}
+                {% embed molecule('order-suggest', 'CustomerOrderSearch') with {
+                    data: {
+                        order: order,
+                    },
+                } only %}
+                {% endembed %}
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}
